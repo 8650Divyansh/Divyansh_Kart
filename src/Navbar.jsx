@@ -35,12 +35,12 @@ function Navbar({productCount,logo}){
       </ul>
     </div>
     <div className='text-6xl text-red-700 pr-3 flex relative hidden md:block'>
+    <Link to="/CartPage"><AiOutlineShoppingCart/>
     <span className=' text-2xl text-black font-bold absolute -top-2 right-3 px-auto  bg-red-400 rounded-full px-1'>{productCount}</span>
-   <Link to="/CartPage"><AiOutlineShoppingCart/></Link>
+   </Link>
     </div>
   </div>
 </nav>
-
   );
 }
 export default Navbar;

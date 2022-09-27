@@ -63,11 +63,11 @@ function ProductListPage() {
   return (
     <div className=''>
 
-      <div className='flex flex-row justify-end gap-7 lg:pr-16 lg:mt-5 mt-3'>
+      <div className='flex md:flex-row flex-col-reverse justify-end gap-2 lg:pr-16 lg:mt-5 mt-3'>
 
 
 
-        <select onChange={handleSortChange} value={sort} className="w-1/4 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block  p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+        <select onChange={handleSortChange} value={sort} className=" text-center md:w-1/4 bg-gray-50 border border-gray-300 text-gray-900 text-sm md:rounded-lg focus:ring-blue-500 focus:border-blue-500 block  p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
           <option value="default">Default Sort</option>
           <option value="name">Sort by name</option>
           <option value="highPrice">Sort by price : Low to high</option>
@@ -80,14 +80,14 @@ function ProductListPage() {
               <svg aria-hidden="true" className="w-5 h-5 text-gray-500 dark:text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
             </div>
             <input
-              className="block max-w-xl p-4 pl-10 text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+              className="placeholder-gray-400 block md:max-w-xl w-screen px-4 md:py-4 py-2 pl-10 text-lg text-gray-900 bg-gray-50 md:rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
               value={query}
               placeholder='search'
               onChange={handlequeryChange} />
           </div>
         </div>
       </div>
-      <div className='md:py-7 py-4 md:px-16 px-5'>
+      <div className='md:py-7 py-4 md:px-16 px-1'>
         {data.length > 0 && <ProductList products={data} />}
         {data.length == 0 && <NoMacthing />}
       </div>

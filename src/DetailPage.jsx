@@ -47,7 +47,7 @@ function DetailPage({ onAddToCart }) {
   return (
     <div className='mx-16 my-7 p-7 flex flex-col'>
 
-      <div className="flex flex-row  max-w-6xl p-7 mx-auto my-6 shadow-2xl">
+      <div className="flex md:flex-row flex-col  max-w-6xl p-7 mx-auto my-6 shadow-2xl">
         <div className="flex-grow">
 
           <img src={product.thumbnail} alt="" />
