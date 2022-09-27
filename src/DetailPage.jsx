@@ -45,35 +45,37 @@ function DetailPage({ onAddToCart }) {
   }
 
   return (
-    <div className='mx-16 my-7 p-7 flex flex-col'>
+    <div className='md:mx-16 md:my-7 sm:p-7 flex flex-col'>
 
-      <div className="flex md:flex-row flex-col  max-w-6xl p-7 mx-auto my-6 shadow-2xl">
+      <div className="flex md:flex-row flex-col  max-w-6xl p-7 mx-auto md:my-6 my-2 shadow-2xl">
+      <Link to="/" className="-mt-7 block md:hidden mb-4 rounded-full self-start border-black border-solid border-2"> <HiArrowNarrowLeft className="text-5xl" /></Link>
         <div className="flex-grow">
 
           <img src={product.thumbnail} alt="" />
         </div>
-        <div className="px-4">
-          <h1 className="font-medium text-2xl text-3xl">{product.heading}</h1>
-          <h5 className="text-gray-500 text-2xl font-medium mb-2">{product.category}</h5>
-          <p className=" text-lg mb-2">
+        <div className="px-4 py-1">
+          <h1 className="font-medium text-xl sm:text-3xl">{product.heading}</h1>
+          <h5 className="text-gray-500 md:text-2xl text-xl  font-semibold sm:mb-2 mb-1">{product.category}</h5>
+          <p className=" text-lg sm:mb-2 mb-1">
             {product.title}
           </p>
-          <h4 className="font-bold my-4">Rs. {product.price}</h4>
-          <p className="text-xl pr-16">{product.description}</p>
-          <div className="flex flex-row mt-7">
+          <h4 className="font-bold sm:my-4 my-1">Rs. {product.price}</h4>
+          <h4 className="font-bold sm:my-4 my-1">rating <span className='text-green-400'>{product.rating} </span></h4>
+          <p className="text-xl  sm:pr-16 pr-3">{product.description}</p>
+          <div className="flex flex-row md:mt-7 mt-2">
             <input type="number" value={count} onChange={handleCountChange} className="w-24 px-2 border-solid border-2 border-black rounded-md mr-4" />
-            <button onClick={handleButtonClick} className="px-9 pl-3 py-2 bg-red-600 text-white text-xl rounded-md hover:bg-red-500" >ADD TO CART</button>
+            <button onClick={handleButtonClick} className="px-9 pl-3 py-2 bg-red-600 text-white  text-center text-xl rounded-md hover:bg-red-500" >ADD TO CART</button>
           </div>
         </div >
 
-        <Link to="/" className="-mt-7 rounded-full self-start border-black border-solid border-2"> <HiArrowNarrowLeft className="text-5xl" /></Link>
+        <Link to="/" className="-mt-7 md:block hidden rounded-full self-start border-black border-solid border-2"> <HiArrowNarrowLeft className="text-5xl" /></Link>
       </div>
       <div className='flex justify-between p-2'>
 
         <div>
-          {id > 1 && <div className='rounded-full border-black border-solid border-2 p-4'><Link to={"/products/" + (id - 1)} > <HiArrowNarrowLeft className="text-5xl" /></Link></div>}</div>
+          {id > 1 && <div className='rounded-full border-black border-solid border-2 p-4'><Link to={"/products/" + (id - 1)} > <HiArrowNarrowLeft className="md:text-5xl text-2xl text-indigo-400" /></Link></div>}</div>
         <div>
-          <div className=' rounded-full border-black border-solid border-2 p-4'><Link to={"/products/" + (id + 1)} > <HiArrowNarrowRight className="text-5xl" /></Link></div></div>
+          <div className=' rounded-full border-black border-solid border-2 p-4'><Link to={"/products/" + (id + 1)} > <HiArrowNarrowRight className="md:text-5xl text-2xl text-indigo-400" /></Link></div></div>
       </div>
     </div>
   );
