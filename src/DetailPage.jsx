@@ -62,9 +62,9 @@ function DetailPage({ onAddToCart }) {
           <h4 className="font-bold sm:my-4 my-1">Rs. {product.price}</h4>
           <h4 className="font-bold sm:my-4 my-1">rating <span className='text-green-400'>{product.rating} </span></h4>
           <p className="text-xl  sm:pr-16 pr-3">{product.description}</p>
-          <div className="flex flex-row md:mt-7 mt-2">
-            <input type="number" value={count} onChange={handleCountChange} className="w-24 px-2 border-solid border-2 border-black rounded-md mr-4" />
-            <button onClick={handleButtonClick} className="px-9 pl-3 py-2 bg-red-600 text-white  text-center text-xl rounded-md hover:bg-red-500" >ADD TO CART</button>
+          <div className="flex flex-row md:mt-7 mt-2 justify-center">
+            <input type="number" value={count} onChange={handleCountChange} className="sm:w-24 w-16 px-2 border-solid border-2 border-black rounded-md mr-4" />
+            <button onClick={handleButtonClick} className="sm:px-9 sm:py-2 px-2 py-1 bg-red-600 text-white  text-center sm:text-xl text-sm rounded-md hover:bg-red-500" >ADD TO CART</button>
           </div>
         </div >
 
