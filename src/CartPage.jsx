@@ -21,7 +21,7 @@ function CartPage(){
        <CartProduct/>
 
       </div>
-      <div className="w-full  flex sm:my-3 my-1">
+      <div className="w-full  flex sm:my-3 my-1 hidden md:block">
       <button className="ml-auto rounded-lg bg-red-600 font-semibold hover:bg-indigo-600 sm:py-4 py-2 text-sm text-white uppercase sm:w-2/4 w-full">Update</button>
       </div>
      <TotalCart/>
