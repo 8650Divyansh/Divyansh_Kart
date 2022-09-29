@@ -5,11 +5,13 @@ function TotalCart() {
     return (
         <div>
             <div className="flex flex-row flex-start hidden md:block" >
-                <div className="py-4">
+                <div className="py-1 -mt-12">
                     <label for="promo" className="font-semibold inline-block mb-3 text-sm uppercase">Promo Code</label>
+                    <div className="w-full  flex my-1">
                     <div className="flex">
                         <input type="text" id="promo" placeholder="Enter your code" className="p-2 text-sm w-full" />
                         <button className="sm:px-16 sm:py-2 px-4 py-1 bg-red-600 text-white  text-center sm:text-xl text-sm rounded-md hover:bg-red-500" >Apply</button>
+                    </div>
                     </div>
                 </div>
 
@@ -49,11 +51,11 @@ function TotalCart() {
                 <div class="py-6">
                     <label for="promo" class="font-semibold inline-block mb-3 text-sm uppercase">Promo Code</label>
                     <div className="flex">
-                    <input type="text" id="promo" placeholder="Enter your code" class="p-2 text-md w-2/4" />
-                    <button class="bg-red-500 hover:bg-red-600 px-16 py-2 text-sm text-white uppercase">Apply</button>
+                        <input type="text" id="promo" placeholder="Enter your code" class="p-2 text-md w-2/4" />
+                        <button class="bg-red-500 hover:bg-red-600 px-16 py-2 text-sm text-white uppercase">Apply</button>
                     </div>
                 </div>
-                
+
                 <div class="border-t mt-2">
                     <div class="flex font-semibold justify-between py-6 text-md uppercase mr-3">
                         <span>Total cost</span>
