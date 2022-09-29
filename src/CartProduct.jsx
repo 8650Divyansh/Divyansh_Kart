@@ -2,8 +2,8 @@ import React from "react";
 import { Link } from "react-router-dom"
 
 function CartProduct() {
-    return (<div className="container mx-auto mt-10 border-b">
-         <div className="flex items-center hover:bg-gray-100 -mx-8 md:px-8 py-5">
+    return (<div className="container mx-auto mt-10 border-b hidden md:block">
+         <div className="flex items-center hover:bg-gray-100 px-2 -mx-8 md:px-8 py-5">
                     <div className="flex md:w-2/5 w-full">
                         <div className="md:w-28">
                             <img className="h-28" src="https://drive.google.com/uc?id=18KkAVkGFvaGNqPy2DIvTqmUH_nk39o3z" alt="" />
