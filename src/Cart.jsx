@@ -3,7 +3,7 @@ import React, { useState } from "react";
 function Index() {
     const [show, setShow] = useState(false);
     return (
-        <>
+        <div className="md:hidden block">
             <div className="flex md:flex-row flex-col w-screen overflow-hidden">
                             <div className="lg:w-1/2 bg-white p-0 items-center">
 
@@ -41,7 +41,7 @@ function Index() {
                         </div>
 
 
-        </>
+        </div>
     );
 }
 
