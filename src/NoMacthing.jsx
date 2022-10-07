@@ -1,4 +1,4 @@
-import React from "react";
+import React,{memo} from "react";
  
 function NoMacthing(){
     return(
@@ -7,4 +7,4 @@ function NoMacthing(){
         </div>
     );
 }
-export default NoMacthing;
+export default memo(NoMacthing);

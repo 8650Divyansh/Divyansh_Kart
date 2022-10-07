@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect,memo } from 'react';
 import { useParams, Link } from 'react-router-dom';
 // import allData from './Demoproduct';
 import { HiArrowNarrowLeft, HiArrowNarrowRight } from "react-icons/hi";

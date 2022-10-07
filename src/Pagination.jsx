@@ -1,4 +1,4 @@
-import React from "react";
+import React,{memo} from "react";
 
 function Paginaton() {
   return (
@@ -29,4 +29,4 @@ function Paginaton() {
     </div>
   )
 }
-export default Paginaton;
+export default memo(Paginaton);

@@ -1,4 +1,4 @@
-import React from 'react';
+import React,{memo} from 'react';
 import {AiOutlineShoppingCart } from "react-icons/ai";
 import { Link } from 'react-router-dom';
 
@@ -45,4 +45,4 @@ function Navbar({productCount,logo}){
 </nav>
   );
 }
-export default Navbar;
+export default memo(Navbar);

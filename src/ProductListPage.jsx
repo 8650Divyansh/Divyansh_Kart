@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState,useMemo} from 'react';
 import ProductList from './ProductList';
 // import allData from './Demoproduct';
 import NoMacthing from './NoMacthing';
@@ -33,6 +33,7 @@ function ProductListPage() {
     return lowerCaseTitle.indexOf(lowerCaseQuery) != -1;
   });
 
+  const sorting = useMemo(() => {
   if (sort == 'highPrice') {
     data.sort(function (x, y) {
       return x.price - y.price;
@@ -46,6 +47,7 @@ function ProductListPage() {
       return (x.title < y.title) ? -1 : 1;
     })
   }
+},[sort,data])
 
   function handlequeryChange(event) {
     setQuery(event.target.value);
@@ -67,7 +69,7 @@ function ProductListPage() {
 
 
 
-        <select onChange={handleSortChange} value={sort} className=" text-center md:w-1/4 bg-gray-50 border border-gray-300 text-gray-900 text-sm md:rounded-lg focus:ring-blue-500 focus:border-blue-500 block  p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+        <select onChange={handleSortChange} value={sorting} className=" text-center md:w-1/4 bg-gray-50 border border-gray-300 text-gray-900 text-sm md:rounded-lg focus:ring-blue-500 focus:border-blue-500 block  p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
           <option value="default">Default Sort</option>
           <option value="name">Sort by name</option>
           <option value="highPrice">Sort by price : Low to high</option>

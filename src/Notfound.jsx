@@ -1,4 +1,4 @@
-import React from "react";
+import React,{memo} from "react";
 function Notfound(){
     return(
         <>
@@ -6,4 +6,4 @@ function Notfound(){
         </>
     )
 }
-export default Notfound;
+export default memo(Notfound);
