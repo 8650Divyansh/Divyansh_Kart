@@ -1,7 +1,8 @@
-import { useFormik } from "formik";
+import { Formik,Form} from "formik";
 import React from "react";
 import { Link } from "react-router-dom"
 import * as yup from "yup";
+import Input from "./Input";
 
 function LoginPage() {
     function callLoginApi(values) {
@@ -13,14 +14,11 @@ function LoginPage() {
         password:yup.string().min(8).required(),
     })
 
-    const {handleSubmit,values,handleChange,errors,handleBlur,touched,isValid,dirty} = useFormik({
-        initialValues: {
-            email: '',
-            password: '',
-          },
-          onSubmit:callLoginApi,
-          validationSchema:schema,
-    });
+    
+    const initialValues ={
+        email: '',
+        password: '',
+    }
     return (
         <section className="p-4 ">
             <Link to="/" className="flex font-semibold text-indigo-600 text-sm ">
@@ -34,33 +32,30 @@ function LoginPage() {
                         <h1 className="text-xl font-bold leading-tight tracking-tight text-white md:text-2xl dark:text-white">
                             Sign in to your account
                         </h1>
-                        <form onSubmit={handleSubmit} className="space-y-4 md:space-y-6" action="#">
-                            <div>
-                                <label htmlFor="email" className="block mb-2 text-sm font-medium text-white dark:text-white">Your email</label>
-                                <input className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-white dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" 
-                                value={values.email} 
-                                onChange={handleChange} 
-                                onBlur={handleBlur}
-                                type="email" 
-                                name="email" 
-                                id="email"  
-                                placeholder="name@company.com" 
-                                />
-                                 {touched.email && errors.email && <div className="text-red-700 text-md">{errors.email}</div>}
-                            </div>
-                            <div>
-                                <label htmlFor="password" className="block mb-2 text-sm font-medium text-white dark:text-white">Password</label>
-                                <input  className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-white dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                value={values.password} 
-                                onChange={handleChange} 
-                                onBlur={handleBlur}
-                                type="password" 
-                                name="password" 
-                                id="password" 
-                                placeholder="••••••••" 
-                                 />
-                                {touched.password && errors.password && <div className="text-red-700 text-md">{errors.password}</div>}
-                            </div>
+                        <Formik 
+                        initialValues={initialValues}
+                        onSubmit={callLoginApi}
+                        validationSchema={schema}
+                        validateOnMount
+                        >
+                        <Form className="space-y-4 md:space-y-6" action="#">
+                            <Input
+                              label="Your email"
+                              id="email" 
+                              name="email" 
+                              type="email" 
+                              autoComplete="email" 
+                              placeholder="name@company.com" 
+                              />
+                            <Input
+                              label="Password"
+                              id="password" 
+                              name="password" 
+                              type="password" 
+                              autoComplete="password" 
+                              placeholder="••••••••" 
+                           
+                              />
                             <div className="flex items-center justify-between">
                                 <div className="flex items-start">
                                     <div className="flex items-center h-5">
@@ -72,11 +67,13 @@ function LoginPage() {
                                 </div>
                                 <Link to="/ForgotPassword" className="text-md font-bold text-primary-600 hover:underline dark:text-primary-500">Forgot password?</Link>
                             </div>
-                            <button type="submit" disabled={!isValid} className="w-full  text-white disabled:bg-gray-400 bg-gray-900 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-md px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">Sign in</button>
+                            <button type="submit"  className="w-full  text-white disabled:dark:bg-indigo-500 bg-gray-900 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-md px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">Sign in</button>
                             <p className="text-md font-semibold text-black dark:text-black">
                                 Don’t have an account yet? <Link to="/Signup" className="font-medium text-primary-600 hover:underline dark:text-primary-500">Sign up</Link>
                             </p>
-                        </form>
+                           
+                        </Form>
+                        </Formik>
                     </div>
                 </div>
             </div>
