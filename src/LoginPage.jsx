@@ -2,7 +2,7 @@ import { Formik,Form} from "formik";
 import React from "react";
 import { Link } from "react-router-dom"
 import * as yup from "yup";
-import Input from "./Input";
+import {FormikInput} from "./Input";
 
 function LoginPage() {
     function callLoginApi(values) {
@@ -39,7 +39,7 @@ function LoginPage() {
                         validateOnMount
                         >
                         <Form className="space-y-4 md:space-y-6" action="#">
-                            <Input
+                            <FormikInput
                               label="Your email"
                               id="email" 
                               name="email" 
@@ -47,7 +47,7 @@ function LoginPage() {
                               autoComplete="email" 
                               placeholder="name@company.com" 
                               />
-                            <Input
+                            <FormikInput
                               label="Password"
                               id="password" 
                               name="password" 
