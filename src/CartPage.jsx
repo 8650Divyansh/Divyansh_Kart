@@ -1,41 +1,72 @@
-import React, { useEffect } from "react";
-import Cart from "./Cart";
-import CartProduct from "./CartProduct";
-import TotalCart from "./TotalCart";
+import React, { useEffect, useState } from "react";
+import { getProductData } from "./Api";
+import Input from "./Input";
+import { ImCross } from "react-icons/im"
+import { number } from "yup";
+import Loading from "./Loading";
 
-function CartPage({cart}){
-  useEffect(function() {
+function CartPage({ cart,updateCart }) {
+  const [products, setProducts] = useState([]);
+  const[loading, setLoading] = useState(true);
+  const[localcart,setlocalcart]=useState(cart)
 
-  }, []);
-    return(
-    
-    <div className="container mx-auto mt-1">
-    <div className="flex flex-col shadow-md sm:my-4 my-2 items-center">
-      <div className="sm:w-4/5 bg-white sm:py-6 py-2">
-        <div>
-        <div className="flex justify-between sm:p-4 p-2 bg-gray-200 rounded-lg">
-          <h1 className="font-semibold sm:text-2xl text-md">Shopping Cart</h1>
-          <h2 className="font-semibold sm:text-2xl t2xt-md">3 Items</h2>
-        </div>
-        <div className="flex sm:mt-7 sm:mt-4 mt-2 mb-5  border-b py-2 sm:px-0 px-2">
-          <h3 className="font-semibold text-gray-600 text-xs uppercase w-2/5">Product Details</h3>
-          <h3 className="font-semibold text-center text-gray-600 text-xs uppercase w-1/5 text-center">Quantity</h3>
-          <h3 className="font-semibold text-center text-gray-600 text-xs uppercase w-1/5 text-center">Price</h3>
-          <h3 className="font-semibold text-center text-gray-600 text-xs uppercase w-1/5 text-center">Total</h3>
-        </div>
-       <CartProduct/>
-       <Cart/>
+  const productIds = Object.keys(cart);
 
-      </div>
-      <div className="w-full  flex sm:my-3 my-1">
-      <button className="ml-auto rounded-lg bg-red-600 font-semibold hover:bg-indigo-600 sm:py-4 py-2 text-sm text-white uppercase sm:w-2/4 w-full">Update</button>
-      </div>
-     <TotalCart/>
-     </div>
-    </div>
-  </div>
- 
+  useEffect(function(){
+ setlocalcart(cart);
+  },[cart])
+
+  useEffect(function () {
+    const myProductPromises = productIds.map(function (id) {
+      return getProductData(id);
+    });
+    Promise.all(myProductPromises).then(function (products) {
+      setProducts(products);
+      setLoading(false);
+    });
+  }, [cart]);
+
+  function handleRemove(event) {
+    const productid = event.currentTarget.getAttribute("productid");
+    const newCart = {...cart};
+    delete newCart[productid];
+    updateCart(newCart);
+    setLoading(true);
+  };
+  function handleupdateCart(){ 
+    updateCart(localcart);
+  }
   
+  function handleChange(event) {
+  const newvalue = +event.target.value;
+  const productid = event.target.getAttribute('productid')
+  const newLocalCart ={...localcart,[productid]:newvalue};
+  setlocalcart(newLocalCart);
+  };
+
+if(loading){
+  return <Loading/>
+}
+  return (
+    <div>
+      {products.map(function (p) {
+        return (
+      
+          <div className="flex items-center gap-5">
+            <div key={p.id}>{p.title}</div>
+            <Input className="w-20 h-10 pl-5" value={localcart[p.id]} type="number" onChange={handleChange} productid={p.id}/>
+            <button productid={p.id} onClick={handleRemove}><ImCross /></button>
+            
+
+          </div>
+         
+            
+          
+          
+        )
+      })}
+       <button className="bg-red-500 px-2 py-3 rounded-lg"  onClick={handleupdateCart}>updateCart</button>
+    </div>
   );
 }
 export default CartPage

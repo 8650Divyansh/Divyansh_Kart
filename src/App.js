@@ -19,10 +19,13 @@ function App() {
   function handleAddToCart(productid, count) {
     const oldCount = cart[productid] || 0;
     const newCart = { ...cart, [productid]: oldCount + count }
+    updateCart(newCart);
+
+  }
+  function updateCart(newCart){
     setCart(newCart);
     const cartString = JSON.stringify(newCart);
     localStorage.setItem("my-cart", cartString);
-
   }
   const totalcount = Object.keys(cart).reduce(function (previous, current) {
     return previous + cart[current];
@@ -38,7 +41,7 @@ function App() {
           <Route index element={<ProductListPage />}></Route>
           <Route path="/products/:id" element={<DetailPage onAddToCart={handleAddToCart} />}></Route>
           <Route path="/products/*" element={<Notfound />}></Route>
-          <Route path="/CartPage" element={<CartPage cart={cart}/>} />
+          <Route path="/CartPage" element={<CartPage cart={cart} updateCart={updateCart}/>} />
           <Route path="/LoginPage" element={<LoginPage />} />
           <Route path="/Signup" element={<SignUpPage />} />
           <Route path="/ForgotPassword" element={<ForgotPassword />} />
