@@ -38,7 +38,7 @@ function App() {
           <Route index element={<ProductListPage />}></Route>
           <Route path="/products/:id" element={<DetailPage onAddToCart={handleAddToCart} />}></Route>
           <Route path="/products/*" element={<Notfound />}></Route>
-          <Route path="/CartPage" element={<CartPage />} />
+          <Route path="/CartPage" element={<CartPage cart={cart}/>} />
           <Route path="/LoginPage" element={<LoginPage />} />
           <Route path="/Signup" element={<SignUpPage />} />
           <Route path="/ForgotPassword" element={<ForgotPassword />} />

@@ -1,10 +1,12 @@
-import React from "react";
-import {Link} from "react-router-dom"
+import React, { useEffect } from "react";
 import Cart from "./Cart";
 import CartProduct from "./CartProduct";
 import TotalCart from "./TotalCart";
 
-function CartPage(){
+function CartPage({cart}){
+  useEffect(function() {
+
+  }, []);
     return(
     
     <div className="container mx-auto mt-1">

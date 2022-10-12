@@ -1,26 +1,25 @@
-import { Formik,Form} from "formik";
+import { withFormik } from "formik";
 import React from "react";
 import { Link } from "react-router-dom"
 import * as yup from "yup";
-import {FormikInput} from "./Input";
+import Input from "./Input";
 
-function LoginPage() {
-    function callLoginApi(values) {
-        console.log("callLoginApi called",values.email ,values.password);  
-    }
-
-    const schema = yup.object().shape({
-        email:yup.string().email().required(),
-        password:yup.string().min(8).required(),
-    })
-
+function callLoginApi(values) {
+    console.log("callLoginApi called",values.email ,values.password);  
+}
+const schema = yup.object().shape({
+    email:yup.string().email().required(),
+    password:yup.string().min(8).required(),
+})
+const initialValues ={
+    email: '',
+    password: '',
+}
+export function LoginPage({handleSubmit,values,errors,touched,handleChange,handleBlur}) {
     
-    const initialValues ={
-        email: '',
-        password: '',
-    }
     return (
         <section className="p-4 ">
+
             <Link to="/" className="flex font-semibold text-indigo-600 text-sm ">
                 <svg className="fill-current mr-2 text-black w-4" viewBox="0 0 448 512"><path d="M134.059 296H436c6.627 0 12-5.373 12-12v-56c0-6.627-5.373-12-12-12H134.059v-46.059c0-21.382-25.851-32.09-40.971-16.971L7.029 239.029c-9.373 9.373-9.373 24.569 0 33.941l86.059 86.059c15.119 15.119 40.971 4.411 40.971-16.971V296z" /></svg>
                 Continue Shopping
@@ -32,14 +31,14 @@ function LoginPage() {
                         <h1 className="text-xl font-bold leading-tight tracking-tight text-white md:text-2xl dark:text-white">
                             Sign in to your account
                         </h1>
-                        <Formik 
-                        initialValues={initialValues}
-                        onSubmit={callLoginApi}
-                        validationSchema={schema}
-                        validateOnMount
-                        >
-                        <Form className="space-y-4 md:space-y-6" action="#">
-                            <FormikInput
+                       
+                        <form onSubmit={handleSubmit} className="space-y-4 md:space-y-6" action="#">
+                            <Input
+                              onChange={handleChange}
+                              onBlur={handleBlur}
+                              value={values.email}
+                              error={errors.email}
+                              touched={touched.email}
                               label="Your email"
                               id="email" 
                               name="email" 
@@ -47,13 +46,18 @@ function LoginPage() {
                               autoComplete="email" 
                               placeholder="name@company.com" 
                               />
-                            <FormikInput
+                            <Input
+                             onChange={handleChange}
+                             onBlur={handleBlur}
+                             value={values.password}
+                             error={errors.password}
+                             touched={touched.password}
                               label="Password"
                               id="password" 
                               name="password" 
                               type="password" 
                               autoComplete="password" 
-                              placeholder="••••••••" 
+                              placeholder="pass••••" 
                            
                               />
                             <div className="flex items-center justify-between">
@@ -72,12 +76,13 @@ function LoginPage() {
                                 Don’t have an account yet? <Link to="/Signup" className="font-medium text-primary-600 hover:underline dark:text-primary-500">Sign up</Link>
                             </p>
                            
-                        </Form>
-                        </Formik>
+                        </form>
                     </div>
                 </div>
             </div>
         </section>
     );
 }
-export default LoginPage;
+const myHOC= withFormik({validationSchema: schema, initialValues:initialValues,  handleSubmit:callLoginApi});
+const EasyLogin = myHOC(LoginPage)
+export default EasyLogin;
