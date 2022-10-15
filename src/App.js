@@ -10,6 +10,7 @@ import LoginPage from './LoginPage';
 import SignUpPage from './SignUpPage';
 import PageNotFound from './PageNotFound';
 import ForgotPassword from './ForgotPassword';
+import Test from './Test';
 
 function App() {
   const savedDataString = localStorage.getItem("my-cart") || "{}";
@@ -33,6 +34,7 @@ function App() {
   return (
     <BrowserRouter>
       <div className=" h-screen overflow-y-scroll flex flex-col">
+        
 
         <Navbar productCount={totalcount} logo={"https://media.discordapp.net/attachments/1000335750983852062/1016604882813321319/IMG_20220906_123433.jpg"} />
 
@@ -41,11 +43,12 @@ function App() {
           <Route index element={<ProductListPage />}></Route>
           <Route path="/products/:id" element={<DetailPage onAddToCart={handleAddToCart} />}></Route>
           <Route path="/products/*" element={<Notfound />}></Route>
-          <Route path="/CartPage" element={<CartPage cart={cart} updateCart={updateCart}/>} />
+          <Route path="/CartPage" element={<CartPage cart={cart} count={totalcount} updateCart={updateCart}/>} />
           <Route path="/LoginPage" element={<LoginPage />} />
           <Route path="/Signup" element={<SignUpPage />} />
           <Route path="/ForgotPassword" element={<ForgotPassword />} />
           <Route path="*" element={<PageNotFound />}></Route>
+          <Route path="test" element={<Test/>}></Route>
         </Routes>
 
 

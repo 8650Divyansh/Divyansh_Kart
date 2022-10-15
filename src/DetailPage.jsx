@@ -29,7 +29,11 @@ function DetailPage({ onAddToCart }) {
   }, [id]);
 
   function handleCountChange(event) {
-    setCount(+event.target.value);
+    const valueCount =(+event.target.value)
+    if(valueCount>=1){
+      setCount(valueCount);
+    }
+   
   };
 
   function handleButtonClick() {
