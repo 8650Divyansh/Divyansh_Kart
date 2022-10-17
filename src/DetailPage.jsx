@@ -30,7 +30,7 @@ function DetailPage({ onAddToCart }) {
 
   function handleCountChange(event) {
     const valueCount =(+event.target.value)
-    if(valueCount>=1){
+    if(valueCount>=0){
       setCount(valueCount);
     }
    

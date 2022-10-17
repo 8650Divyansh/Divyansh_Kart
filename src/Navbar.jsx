@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import MobileMenu from './MobileMenu';
 
 function Navbar({productCount,logo}){
-const [Menuopen,setMenoOpen] = useState(false);
+const [Menuopen,setMenoOpen] = useState(false)
 
 function handleMenuOpen(){
   setMenoOpen(!Menuopen);
@@ -14,9 +14,9 @@ function handleMenuOpen(){
  
 <nav className="p-3 bg-gray-50 rounded border-gray-200 dark:bg-gray-800 dark:border-gray-700">
   <div className="container flex flex-wrap justify-between items-center mx-auto">
-    <Link to="#" className="flex items-center">
+    <a href="#" className="flex items-center">
         <img src={logo} className="mr-3 h-6 sm:h-10" alt="Logo"/>
-    </Link>
+    </a>
     <div className='md:text-6xl text-5xl text-red-700 pr-3 flex relative md:hidden block ml-auto'>
     <span className=' md:text-2xl text-xl text-black font-bold absolute -top-2 right-3 px-0.5 md:px-1  bg-red-400 rounded-full '>{productCount}</span>
    <Link to="/CartPage"><AiOutlineShoppingCart/></Link>
@@ -28,19 +28,16 @@ function handleMenuOpen(){
     <div className="hidden w-full md:block md:w-auto" id="navbar-solid-bg">
       <ul className="flex flex-col mt-4 bg-gray-50 rounded-lg md:flex-row md:space-x-8 md:mt-0 md:text-sm md:font-medium md:border-0 md:bg-transparent dark:bg-gray-800 md:dark:bg-transparent dark:border-gray-700">
         <li>
-          <Link to="#" className="block py-2 pr-4 pl-3 text-white bg-blue-700 rounded md:bg-transparent md:text-blue-700 md:p-0 md:dark:text-white dark:bg-blue-600 md:dark:bg-transparent" aria-current="page"><Link to="/">
-      Continue Shopping
-    </Link>
-    </Link>
+          <Link to="/" className="block py-2 pr-4 pl-3 text-white bg-blue-700 rounded md:bg-transparent md:text-blue-700 md:p-0 md:dark:text-white dark:bg-blue-600 md:dark:bg-transparent" aria-current="page">Continue Shopping</Link>
         </li>
         <li>
-          <Link to="#" className="block py-2 pr-4 pl-3 text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-gray-400 md:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">Services</Link>
+          <a href="#" className="block py-2 pr-4 pl-3 text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-gray-400 md:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">Services</a>
         </li>
         <li>
-          <Link to="#" className="block py-2 pr-4 pl-3 text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-gray-400 md:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">Pricing</Link>
+          <a href="#" className="block py-2 pr-4 pl-3 text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-gray-400 md:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">Contact</a>
         </li>
         <li>
-          <Link to="#" className="block py-2 pr-4 pl-3 text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-gray-400 md:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">Contact</Link>
+          <Link to="/LoginPage" className="block py-2 pr-4 pl-3 text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-gray-400 md:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">Login</Link>
         </li>
       </ul>
     </div>

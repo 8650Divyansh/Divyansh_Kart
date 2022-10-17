@@ -14,7 +14,7 @@ function CartList({ products,cart,updateCart,count }) {
 
          function handleChange(productid,newvalue) {
   
-            if(newvalue>=1){
+            if(newvalue>=0){
               const newLocalCart ={...localcart,[productid]:newvalue};
               setlocalcart(newLocalCart);
             }

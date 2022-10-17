@@ -3,10 +3,23 @@ import React from "react";
 import { Link } from "react-router-dom"
 import * as yup from "yup";
 import Input from "./Input";
+import axios from "axios";
 
-function callLoginApi(values) {
-    console.log("callLoginApi called",values.email ,values.password);  
+function callLoginApi(values,bag) {
+    axios.post("https://myeasykart.codeyogi.io/signup",{email:values.email,password:values.password,fullName:values.Name,
+}).then((response) => {
+    const {user,token} = response.data;
+    localStorage.setItem("token",token);
+    bag.props.setUser(user);
+    if(token){
+        alert("Signup successfully");
+    }
+}).catch((erorrs) =>{
+    const {message} = erorrs;
+    alert(message);
+});
 }
+
 const schema = yup.object().shape({
     email:yup.string().email().required(),
     password:yup.string().min(8).required(),
@@ -54,7 +67,7 @@ return(
                   name="Name" 
                   type="text" 
                   autoComplete="Name" 
-                  placeholder="Divyansh Mourya" 
+                  placeholder="Enter you full name" 
                   />
                 <Input
                   onChange={handleChange}
