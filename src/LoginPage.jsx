@@ -1,19 +1,21 @@
 import { withFormik } from "formik";
 import React from "react";
-import { Link, Navigate } from "react-router-dom"
+import { Link} from "react-router-dom"
 import * as yup from "yup";
 import Input from "./Input";
 import axios from "axios";
+import withUser from "./Withusercontext";
+import withAlert from "./withAlert";
 
 
-function callLoginApi(values,bag) {
+function callLoginApi(values, bag) {
     axios.post("https://myeasykart.codeyogi.io/login",{email:values.email,password:values.password,
 }).then((response) => {
     const {user,token} = response.data;
     localStorage.setItem("token",token);
     bag.props.setUser(user);
 }).catch(() =>{
-    alert("invalid Credentials")
+    bag.props.setAlert({type:"error" ,message:"invalid Credentials"})
 });
 }
 const schema = yup.object().shape({
@@ -92,6 +94,5 @@ export function LoginPage({handleSubmit,values,errors,touched,handleChange,handl
         </section>
     );
 }
-const myHOC= withFormik({validationSchema: schema, initialValues:initialValues,  handleSubmit:callLoginApi});
-const EasyLogin = myHOC(LoginPage)
-export default EasyLogin;
+const EasyLogin= withFormik({validationSchema: schema, initialValues:initialValues,  handleSubmit:callLoginApi})(LoginPage);
+export default withAlert(withUser(EasyLogin));

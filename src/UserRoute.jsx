@@ -1,5 +1,6 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Navigate } from "react-router-dom";
+import withUser from "./Withusercontext";
 
 function UserRoute({user,children}) {
     if(!user){
@@ -8,4 +9,4 @@ function UserRoute({user,children}) {
     return children;
 };
 
-export default UserRoute;
+export default withUser(UserRoute);

@@ -4,6 +4,7 @@ import { Link } from "react-router-dom"
 import * as yup from "yup";
 import Input from "./Input";
 import axios from "axios";
+import withUser from "./Withusercontext";
 
 function callLoginApi(values,bag) {
     axios.post("https://myeasykart.codeyogi.io/signup",{email:values.email,password:values.password,fullName:values.Name,
@@ -148,4 +149,4 @@ return(
 }
 const myHOC= withFormik({validationSchema: schema, initialValues:initialValues,  handleSubmit:callLoginApi});
 const EasyLogin = myHOC(SignUpPage)
-export default EasyLogin;
+export default withUser(EasyLogin);

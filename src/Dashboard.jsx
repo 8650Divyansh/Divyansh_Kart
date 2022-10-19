@@ -1,7 +1,7 @@
 import React from "react";
+import withUser from "./Withusercontext";
 
-function Dasboard({user,setUser}) {
- 
+function Dasboard({user ,setUser}) {
   function handleLogout(){
     localStorage.removeItem("token");
     setUser(undefined)
@@ -17,4 +17,4 @@ function Dasboard({user,setUser}) {
 );
 };
 
-export default Dasboard;
+export default withUser(Dasboard);

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { createContext, useEffect, useState } from 'react';
 import Navbar from './Navbar';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import ProductListPage from './ProductListPage';
@@ -16,14 +16,21 @@ import axios from "axios";
 import Loading from './Loading';
 import UserRoute from './UserRoute';
 import AuthRoute from './AuthRoute';
+import Alert from './Alert';
 
+export const UserContext = createContext();
+export const AlertContext = createContext();
 function App() {
   const savedDataString = localStorage.getItem("my-cart") || "{}";
   const savedData = JSON.parse(savedDataString);
   const [cart, setCart] = useState(savedData);
   const [user,setUser]=useState();
   const[loading,setLoading] = useState(true);
+  const [alert,setAlert] = useState();
 
+  const HandleRemoveAlert =() => {
+    setAlert(undefined);
+};
   console.log("logged in user is",user);
   const token = localStorage.getItem("token");
 
@@ -60,8 +67,11 @@ function App() {
   }
   return (
     <BrowserRouter>
-      <div className=" h-screen overflow-y-scroll flex flex-col">
+    <div className=" h-screen overflow-y-scroll flex flex-col">
+    <UserContext.Provider value={{user,setUser}}>
+    <AlertContext.Provider value={{alert,setAlert ,HandleRemoveAlert}}>
         <Navbar productCount={totalcount} logo={"https://media.discordapp.net/attachments/1000335750983852062/1016604882813321319/IMG_20220906_123433.jpg"} />
+        <Alert/>
         <Routes>
           <Route index element={<ProductListPage />}></Route>
           <Route path="/products/:id" element={<DetailPage onAddToCart={handleAddToCart} />}></Route>
@@ -70,14 +80,15 @@ function App() {
           <Route path="/ForgotPassword" element={<ForgotPassword />} />
           <Route path="*" element={<PageNotFound />}></Route>
           <Route path="test" element={<Test/>}></Route>
-          <Route path="/LoginPage" element={<AuthRoute  user={user}><LoginPage setUser={setUser}/></AuthRoute>} />
-          <Route path="/Dashboard" element={<UserRoute user={user}><Dashboard user={user} setUser={setUser}/></UserRoute>}></Route>
-          <Route path="/Signup" element={<AuthRoute  user={user}><SignUpPage setUser={setUser}/></AuthRoute>} />
+          <Route path="/LoginPage" element={<AuthRoute  ><LoginPage/></AuthRoute>} />
+          <Route path="/Dashboard" element={<UserRoute ><Dashboard /></UserRoute>}></Route>
+          <Route path="/Signup" element={<AuthRoute  ><SignUpPage /></AuthRoute>} />
         </Routes>
 
 
         <Footer logo="https://media.discordapp.net/attachments/1000335750983852062/1016604882813321319/IMG_20220906_123433.jpg" />
-
+        </AlertContext.Provider>
+        </UserContext.Provider>
       </div>
     </BrowserRouter>
   );
