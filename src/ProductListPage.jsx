@@ -30,19 +30,19 @@ function ProductListPage() {
     const lowerCaseTitle = item.title.toLowerCase();  
     const lowerCaseQuery = query.toLowerCase();
 
-    return lowerCaseTitle.indexOf(lowerCaseQuery) != -1;
+    return lowerCaseTitle.indexOf(lowerCaseQuery) !== -1;
   });
 
   const sorting = useMemo(() => {
-  if (sort == 'highPrice') {
+  if (sort === 'highPrice') {
     data.sort(function (x, y) {
       return x.price - y.price;
     });
-  } else if (sort == 'lowPrice') {    //sorting 
+  } else if (sort === 'lowPrice') {    //sorting 
     data.sort(function (x, y) {
       return (y.price - x.price);
     });
-  } else if (sort == 'name') {
+  } else if (sort === 'name') {
     data.sort(function (x, y) {
       return (x.title < y.title) ? -1 : 1;
     })
@@ -91,7 +91,7 @@ function ProductListPage() {
       </div>
       <div className='md:py-7 py-4 md:px-16 px-1'>
         {data.length > 0 && <ProductList products={data} />}
-        {data.length == 0 && <NoMacthing />}
+        {data.length === 0 && <NoMacthing />}
       </div>
 
     </div>

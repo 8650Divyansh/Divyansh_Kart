@@ -47,7 +47,7 @@ function App() {
   } else{
     setLoading(false);
   }
-  },[]);
+  });
   function handleAddToCart(productid, count) {
     const oldCount = cart[productid] || 0;
     const newCart = { ...cart, [productid]: oldCount + count }

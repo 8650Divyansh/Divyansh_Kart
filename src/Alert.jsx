@@ -13,11 +13,11 @@ function Alert({alert,setAlert,removeAlert}) {
     let color;
     let Icon;
 
-    if(type== 'success'){
+    if(type=== 'success'){
        color = "bg-green-400";
        Icon = AiOutlineCheck;
     }
-    else if(type == 'error'){
+    else if(type === 'error'){
         color = "bg-red-500";
         Icon = ImCross;
         

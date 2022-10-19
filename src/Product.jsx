@@ -6,7 +6,7 @@ function Product({ thumbnail, category, title, price, id ,rating}) {
       <div className="flex justify-center">
         <div className="rounded-lg shadow-lg bg-white max-w-sm aspect-auto flex flex-row sm:flex-col">
           <div>
-          <a href="#">
+          <a href="https://www.google.com">
             <img className="rounded-t-lg sm:h-80 h-32 object-contain h-screen w-screen" src={thumbnail} alt="" />
           </a>
           <p className=" sm:text-lg text-indigo-400 text-center text-sm sm:hidden block">
