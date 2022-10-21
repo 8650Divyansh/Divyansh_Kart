@@ -17,9 +17,9 @@ import Loading from './Loading';
 import UserRoute from './UserRoute';
 import AuthRoute from './AuthRoute';
 import Alert from './Alert';
+import {UserContext,AlertContext} from './Contexts'
 
-export const UserContext = createContext();
-export const AlertContext = createContext();
+
 function App() {
   const savedDataString = localStorage.getItem("my-cart") || "{}";
   const savedData = JSON.parse(savedDataString);
@@ -28,7 +28,7 @@ function App() {
   const[loading,setLoading] = useState(true);
   const [alert,setAlert] = useState();
 
-  const HandleRemoveAlert =() => {
+  const removeAlert =() => {
     setAlert(undefined);
 };
   console.log("logged in user is",user);
@@ -69,7 +69,7 @@ function App() {
     <BrowserRouter>
     <div className=" h-screen overflow-y-scroll flex flex-col">
     <UserContext.Provider value={{user,setUser}}>
-    <AlertContext.Provider value={{alert,setAlert ,HandleRemoveAlert}}>
+    <AlertContext.Provider value={{alert,setAlert,removeAlert}}>
         <Navbar productCount={totalcount} logo={"https://media.discordapp.net/attachments/1000335750983852062/1016604882813321319/IMG_20220906_123433.jpg"} />
         <Alert/>
         <Routes>

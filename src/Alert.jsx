@@ -1,12 +1,25 @@
-import React from "react";
+import React, { useEffect } from "react";
 import {AiOutlineCheck} from 'react-icons/ai';
 import {ImCross} from 'react-icons/im';
-import withAlert from "./withAlert";
+import { AlertContext } from "./Contexts";
+import {withAlert} from "./withProvider";
 function Alert({alert,setAlert,removeAlert}) {
+
+    useEffect(function(){
+        if (alert){
+            const timeout= setTimeout(removeAlert,3*1000);
+            return function(){
+                clearTimeout(timeout);
+            };
+        }
+    },[alert]
+    );
 
     if(!alert){
         return;
     }
+    
+
     const {message,type} = alert;
 
 
