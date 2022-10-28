@@ -1,5 +1,5 @@
 import React from 'react';
-import Pagination from './Pagination';
+
 import Product from './Product';
 
 function ProductList({products}){
@@ -8,8 +8,8 @@ function ProductList({products}){
     {products.map(function(item){
     return (
         
-      <Product key={item.title} {...item}/>)})}
-      <Pagination/>
+      <Product key={item.id} {...item}/>)})}
+      
   </div>
   );
 };

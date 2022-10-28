@@ -1,53 +1,42 @@
-import React, { useEffect, useState,useMemo} from 'react';
+import React, { useEffect, useState} from 'react';
 import ProductList from './ProductList';
 // import allData from './Demoproduct';
 import NoMacthing from './NoMacthing';
 import { getProductList } from "./Api";
 import Loading from './Loading';
+import Pagination from './Pagination';
 
 function ProductListPage() {
-  const [productList, setproductlist] = useState([]);  // jise ke productlist mai data ka lose na ho jab tak use effect wala code run na ho tab tak phele wala code usestat mai rahe
+  const [productData, setproducData] = useState({});  // jise ke productlist mai data ka lose na ho jab tak use effect wala code run na ho tab tak phele wala code usestat mai rahe
   const [loading,SetLoading] =useState(true);
-  
-
-  
-
   const [query, setQuery] = useState("");
-
   const [sort, setSort] = useState("default");
+  const [page,setPage] = useState(1);
 
-  useEffect(function () {           //product ke mount unmount hone per code run hoga 
-  getProductList().then(function(products){
-      setproductlist(products);
+
+  useEffect(function () {     
+    
+    let sortBy;  
+    let sortType;
+
+    if(sort ==='title'){
+      sortBy ='title' ;
+    }
+    else if(sort ==='lowPrice'){
+      sortBy ='price' ;
+    }
+    else if(sort ==='highPrice'){
+      sortBy ='price' ;
+      sortType ='desc';
+    }    //product ke mount unmount hone per code run hoga 
+
+  getProductList({sortBy,query,page,sortType}).then(function(xyz){
+    setproducData(xyz);
       SetLoading(false);
     })
-    
-  }, []); // jab bhi user page pr kux bhi change kre tw function bar bar run na ho
-  
+    }, [sort,query,page]); // jab bhi user page pr kux bhi change kre tw function bar bar run na ho
 
 
-  let data = productList.filter(function (item) {
-    const lowerCaseTitle = item.title.toLowerCase();  
-    const lowerCaseQuery = query.toLowerCase();
-
-    return lowerCaseTitle.indexOf(lowerCaseQuery) !== -1;
-  });
-
-  const sorting = useMemo(() => {
-  if (sort === 'highPrice') {
-    data.sort(function (x, y) {
-      return x.price - y.price;
-    });
-  } else if (sort === 'lowPrice') {    //sorting 
-    data.sort(function (x, y) {
-      return (y.price - x.price);
-    });
-  } else if (sort === 'name') {
-    data.sort(function (x, y) {
-      return (x.title < y.title) ? -1 : 1;
-    })
-  }
-},[sort,data])
 
   function handlequeryChange(event) {
     setQuery(event.target.value);
@@ -69,7 +58,7 @@ function ProductListPage() {
 
 
 
-        <select onChange={handleSortChange} value={sorting} className=" text-center md:w-1/4 bg-gray-50 border border-gray-300 text-gray-900 text-sm md:rounded-lg focus:ring-blue-500 focus:border-blue-500 block  p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+        <select onChange={handleSortChange} value={sort} className=" text-center md:w-1/4 bg-gray-50 border border-gray-300 text-gray-900 text-sm md:rounded-lg focus:ring-blue-500 focus:border-blue-500 block  p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
           <option value="default">Default Sort</option>
           <option value="name">Sort by name</option>
           <option value="highPrice">Sort by price : Low to high</option>
@@ -90,10 +79,14 @@ function ProductListPage() {
         </div>
       </div>
       <div className='md:py-7 py-4 md:px-16 px-1'>
-        {data.length > 0 && <ProductList products={data} />}
-        {data.length === 0 && <NoMacthing />}
-      </div>
+        {productData.data.length > 0 && <ProductList products={productData.data} />}
+        {productData.data.length === 0 && <NoMacthing />}
+        
+       {[...Array(productData.meta.last_page).keys()].map((item) => <button className='mr-3' onClick={() => setPage(item+1)}>{item+1}</button>)}
 
+      </div>
+     
+  
     </div>
   );
 }
