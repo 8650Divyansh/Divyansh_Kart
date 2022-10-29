@@ -5,13 +5,27 @@ import NoMacthing from './NoMacthing';
 import { getProductList } from "./Api";
 import Loading from './Loading';
 import Pagination from './Pagination';
+import { Link,useSearchParams } from 'react-router-dom';
 
 function ProductListPage() {
   const [productData, setproducData] = useState({});  // jise ke productlist mai data ka lose na ho jab tak use effect wala code run na ho tab tak phele wala code usestat mai rahe
   const [loading,SetLoading] =useState(true);
-  const [query, setQuery] = useState("");
-  const [sort, setSort] = useState("default");
-  const [page,setPage] = useState(1);
+ 
+  
+
+const [searchParams,setSearchParams] = useSearchParams();
+
+const params = Object.fromEntries([...searchParams]);
+ 
+let { query,sort,page } = params;
+
+ query = query|| "";
+ page = +page || 1;
+ sort = sort || "default";
+
+
+page = page || 1;
+
 
 
   useEffect(function () {     
@@ -39,11 +53,15 @@ function ProductListPage() {
 
 
   function handlequeryChange(event) {
-    setQuery(event.target.value);
+    setSearchParams( 
+      {...searchParams,query: event.target.value},
+      {realace:false});
   };
 
   function handleSortChange(event) {
-    setSort(event.target.value);
+    setSearchParams(
+      {...searchParams,sort: event.target.value},
+      {replace:false});
   };
 
 
@@ -82,7 +100,12 @@ function ProductListPage() {
         {productData.data.length > 0 && <ProductList products={productData.data} />}
         {productData.data.length === 0 && <NoMacthing />}
         
-       {[...Array(productData.meta.last_page).keys()].map((item) => <button className='mr-3' onClick={() => setPage(item+1)}>{item+1}</button>)}
+       {[...Array(productData.meta.last_page).keys()].map((pageNo) =>(
+        <Link className={"py-4 px-3  ml-3 rounded-lg " + (pageNo+1 === page ? "bg-red-500" : "bg-indigo-700")} 
+        to={"?" +new URLSearchParams({...params,page:pageNo+1})} key={pageNo}>
+          {pageNo+1}
+          </Link>
+        ))}
 
       </div>
      
